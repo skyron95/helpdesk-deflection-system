@@ -1,0 +1,16 @@
+
+services:  #Define los contenedores que va a ejecutar.
+  db:
+    image: postgres:15-alpine #Descarga la imagen oficial de PostgreSQL
+    container_name: helpdesk_postgres #El nombre que tendrá el contenedor en Docker 
+    environment: #Define las variables de entorno para inicializar la BD
+      POSTGRES_USER: ${POSTGRES_USER}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+      POSTGRES_DB: ${POSTGRES_DB}
+    ports: #Conecta el puerto 5432 de tu computadora local (izquierda) con el puerto 5432 dentro del contenedor (derecha).
+      - "5432:5432" 
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+
+volumes: #Persistencia de datos.
+  postgres_data:
